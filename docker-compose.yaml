@@ -1,0 +1,22 @@
+services:
+  lobe-midjourney-webui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3040:3040"
+    environment:
+      - MIDJOURNEY_PROXY_URL=http://midjourney-proxy:8080
+    depends_on:
+      - midjourney-proxy
+
+  midjourney-proxy:
+    image: novicezk/midjourney-proxy:2.6.3
+    ports:
+      - "8080:8080"
+    environment:
+      - mj.discord.guild-id=
+      - mj.discord.channel-id=
+      - mj.discord.user-token=
+      - mj.proxy.host=
+      - mj.proxy.port=

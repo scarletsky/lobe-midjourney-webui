@@ -1,4 +1,5 @@
 const isProd = process.env.NODE_ENV === 'production';
+const buildWithDocker = process.env.DOCKER === 'true';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -18,6 +19,8 @@ const nextConfig = {
     ],
     unoptimized: !isProd,
   },
+
+  output: buildWithDocker ? 'standalone' : undefined,
 
   async headers() {
     return isProd
